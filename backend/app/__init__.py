@@ -21,6 +21,11 @@ def create_app():
     db.init_app(app)
     jwt.init_app(app)
 
+    from . import models
+    from .api.auth.routes import auth_bp
+
+    app.register_blueprint(auth_bp)
+
     @app.get("/api/health")
     def health_check():
         return {
